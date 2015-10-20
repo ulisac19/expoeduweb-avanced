@@ -102,7 +102,9 @@
 
     <div id="map"></div>
 </div>
+<div class="form-group col-sm-6 col-lg-12">
       <button type="button" class="btn btn-danger" onclick="deleteMarkers();" value=""><i class='glyphicon glyphicon-trash'></i> Quizar todos</button>
+</div>
 
     
 </br>
