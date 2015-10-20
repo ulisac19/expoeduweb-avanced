@@ -1,12 +1,30 @@
 @extends('app')
 @section('content')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&libraries=places" type="text/javascript"></script>
+
 <div class="container">
 <style>
-  #map-canvas{
-    width: 350px;
-    height: 250px;
-  }
+ html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 500px;
+    width: 500px; 
+      }
+#floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
 </style>
     @include('common.errors')
 
@@ -75,21 +93,19 @@
             {!! Form::text('direccion', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-12">
-      {!! Form::label('direccion', 'Direccion google maps') !!}
-          {!! Form::text('direccion', '', ['class' => 'form-control', 'id'=>'searchmap']) !!}
-          <br>
-          <div id="map-canvas"></div>
-        </div>
-        <div class="form-group"><input type="hidden" class="form-control input-sm" name="lat" id="lat"></div>
-        <div class="form-group"><input type="hidden" class="form-control input-sm" name="lng" id="lng"></div>  
-
-      <div class="form-group col-sm-6 col-lg-6"><button type="button" class="btn btn-primary" onClick="nuevaMarca();"><i class="glyphicon glyphicon-plus"></i> Agregar sucursal</button>
-      <button type="button" class="btn btn-danger" onClick="quitarMarca();"><i class="glyphicon glyphicon-minus"></i> Quitar sucursal</button></div>
 
 
-    </div>
+      <!--
+      <button type="button" class="btn btn-primary" onclick="clearMarkers();" value="Mos">
+      <button type="button" class="btn btn-primary" onclick="showMarkers();" value="a">
+      -->
+
+    <div id="map"></div>
 </div>
-<br>
+      <button type="button" class="btn btn-danger" onclick="deleteMarkers();" value=""><i class='glyphicon glyphicon-trash'></i> Quizar todos</button>
+
+    
+</br>
 <div class="panel panel-default">
     <div class="panel-body">
         <!-- Facebook Field -->
@@ -189,70 +205,58 @@
 
 <script>
 
+var map;
+var markers = [];
 
-  var map = new google.maps.Map(document.getElementById('map-canvas'),{
-    center:{
-      lat: 27.72,
-          lng: 85.36
-    },
-    zoom:15
-  });
-  var mismarcas = new Array();
-  var j = -1;
-  
-  var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
+function initMap() {
+  var haightAshbury = {lat: 37.769, lng: -122.446};
 
-  google.maps.event.addListener(searchBox,'places_changed',function(){
-
-    var places = searchBox.getPlaces();
-    var bounds = new google.maps.LatLngBounds();
-    var i, place;
-
-    for(i=0; place=places[i];i++){
-        bounds.extend(place.geometry.location);
-        
-      }
-
-      map.fitBounds(bounds);
-      map.setZoom(15);
-
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 2,
+    center: haightAshbury,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
   });
 
-  function nuevaMarca()
-  { j++;
-    mismarcas[j] = new google.maps.Marker({
-    position: {
-        lat: 27.72,
-            lng: 85.36
-      },
-      map: map,
-      draggable: true
-    });
+  // This event listener will call addMarker() when the map is clicked.
+  map.addListener('click', function(event) {
+    addMarker(event.latLng);
+  });
 
-    mismarcas[j].setPosition(place.geometry.location); 
+  // Adds a marker at the center of the map.
+  addMarker(haightAshbury);
+}
 
-    google.maps.event.addListener(mismarcas[j],'position_changed',function(){
+// Adds a marker to the map and push to the array.
+function addMarker(location) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+  markers.push(marker);
+}
 
-    var lat = mismarcas[j].getPosition().lat();
-    var lng = mismarcas[j].getPosition().lng();
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
 
-    $('#lat').val(lat);
-    $('#lng').val(lng);
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setMapOnAll(null);
+}
 
-    });
+// Shows any markers currently in the array.
+function showMarkers() {
+  setMapOnAll(map);
+}
 
-
-    
-
-  } 
-  
-  function quitarMarca()
-  {
-    alert(j);
-    mismarcas[j].remove();
-   delete mismarcas[j];
-    j--;
-  } 
-
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyB6K1CFUQ1RwVJ-nyXxd6W0rfiIBe12Q&signed_in=true&callback=initMap"></script>
 @endsection
