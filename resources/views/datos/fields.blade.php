@@ -22,7 +22,7 @@
     <!-- Fecha Nacimiento Field -->
     <div class="form-group col-sm-6 col-lg-4">
         {!! Form::label('fecha_nacimiento', 'Fecha Nacimiento:') !!}
-        {!! Form::date('fecha_nacimiento', null, ['class' => 'form-control']) !!}
+        {!! Form::text('fecha_nacimiento', null, ['class' => 'form-control fecha']) !!}
     </div>
 
     <!-- Telefono Field -->

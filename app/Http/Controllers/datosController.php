@@ -178,4 +178,16 @@ class datosController extends AppBaseController
 
 		return redirect(route('datos.index'));
 	}
+
+	public function activos()
+	{
+		$activos = array();
+
+		foreach (\App\Models\datos::where('activo', '=', '1')->get() as $item )
+		{
+			array_push($activos, ['id'=>$item->users_id]);
+		}
+		return json_encode($activos);
+
+	}
 }

@@ -20,19 +20,19 @@
 <!-- Fecha Incio Field -->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('fecha_inicio', 'Fecha Inicio:') !!}
-	{!! Form::date('fecha_inicio', null, ['class' => 'form-control']) !!}
+	{!! Form::text('fecha_inicio', null, ['class' => 'form-control fecha']) !!}
 </div>
 
 <!-- Fecha Final Field -->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('fecha_final', 'Fecha Final:') !!}
-	{!! Form::date('fecha_final', null, ['class' => 'form-control']) !!}
+	{!! Form::text('fecha_final', null, ['class' => 'form-control fecha']) !!}
 </div>
 
 <!-- Fecha Desmontaje Field -->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('fecha_desmontaje', 'Fecha Desmontaje:') !!}
-	{!! Form::date('fecha_desmontaje', null, ['class' => 'form-control']) !!}
+	{!! Form::text('fecha_desmontaje', null, ['class' => 'form-control fecha']) !!}
 </div>
 
 <!-- Descripcion Field -->

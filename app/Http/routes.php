@@ -96,6 +96,7 @@ Route::get('datos/{id}/edit3', ['as' => 'datos.edit3', 'uses' => 'datosControlle
 Route::get('datos/{id}/edit4', ['as' => 'datos.edit4', 'uses' => 'datosController@edit4']);
 Route::get('datos/{id}/edit5', ['as' => 'datos.edit5', 'uses' => 'datosController@edit5']);
 Route::get('datos/{id}/edit6', ['as' => 'datos.edit6', 'uses' => 'datosController@edit6']);
+Route::get('datos/activos', ['as' => 'datos.activos', 'uses' => 'datosController@activos']);
 
 Route::resource('datos', 'datosController');
 
@@ -301,4 +302,15 @@ Route::resource('pais', 'paisController');
 Route::get('pais/{id}/delete', [
     'as' => 'pais.delete',
     'uses' => 'paisController@destroy',
+]);
+
+
+Route::get('posicionAvatars/todas', [ 'as'=>'posicionAvatars.todas', 'uses' => 'posicion_avatarController@todas']);
+Route::get('posicionAvatars/updateposicion', [ 'as'=>'posicionAvatars.updateposicion', 'uses' => 'posicion_avatarController@updatePosicion']);
+
+Route::resource('posicionAvatars', 'posicion_avatarController');
+
+Route::get('posicionAvatars/{id}/delete', [
+    'as' => 'posicionAvatars.delete',
+    'uses' => 'posicion_avatarController@destroy',
 ]);

@@ -18,6 +18,7 @@ display: none !important;
     {!! Html::style('css/style.css') !!}
     {!! Html::style('css/wizard.css') !!}
     {!! Html::style('css/fileinput.min.css') !!}
+    {!! Html::style('css/bootstrap-datepicker.css') !!}
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,6 +29,7 @@ display: none !important;
     <![endif]-->
 </head>
 <body>
+	<div id="a"></div>
 <div class="navbar-wrapper">
       <div class="container">
     <nav class="navbar navbar-inverse navbar-static-to">
@@ -189,18 +191,14 @@ display: none !important;
     
 
 @endif
-<?php 
-	if( Auth::check() )
-	{
-		$datos = \App\Models\datos::where(['users_id'=>Auth::user()->id])->update(['activo'=>1]);	
-	}
-?>
+
 
     <!-- Scripts -->
     
     {!! HTML::script('js/jquery.min.js') !!}
     {!! Html::script('js/bootstrap.min.js') !!}
     {!! Html::script('js/fileinput.min.js') !!}
+    {!! Html::script('js/bootstrap-datepicker.js') !!}
     <script type="text/javascript">
     var cont = 0;
     var band = true;
@@ -387,10 +385,32 @@ var cad, id2;
 	});
 
 var myVar = setInterval(function(){ myTimer() }, 1000);
+var x = y = z = rot = action = 0;
 function myTimer() 
 {
 	$("#contenedor").load( "chats/todos/"+$('#id1').val()+"/"+$('#id_cliente').val()); 
+	$.ajax({
+			url: "{{ route('datos.activos') }}",
+			type: 'GET',
+			data: {},
+			success : function(result){
+				
+			}
+	});	
+
+	$.ajax({
+			url: "{{ route('posicionAvatars.updateposicion') }}",
+			type: 'GET',
+			data: {x: 1, y: 1, z: 1, rot: 1, action: 1, user_id:1 },
+			success : function(result){
+				console.log(result);
+			}
+	});
 }
+	$('.fecha').datepicker({
+		 todayBtn: true,
+		
+	});
 </script>
 
 </body>
