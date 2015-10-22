@@ -144,6 +144,7 @@ display: none !important;
                     <input id="id1" type="hidden" value="<?= Auth::user()->id ?>" />
                     <input id="id2" type="hidden" value="" />
 
+    <!--
     <div class="row chat-window col-xs-5 col-md-3" id="chat_window_todos" style="margin-left:40%">
         	<div class="col-xs-12 col-md-12">
         	<div class="panel panel-default">
@@ -188,7 +189,7 @@ display: none !important;
         </div>
     </div>
     </div>
-    
+    -->
 
 @endif
 
