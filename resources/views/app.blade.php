@@ -81,6 +81,7 @@ display: none !important;
 		                  <ul class="dropdown-menu">
 		                  	 <li>{!! link_to('/tipoStands/create', 'Admin - tipos stand editar', []) !!}</li>
 		                  	 <li>{!! link_to('/ferias/create', 'Admin - ferias', []) !!}</li>
+		                     <li>{!! link_to('/publicidads', 'Publicidades', []) !!}</li>
 		                  </ul>
 		                </li>
 	                @endif

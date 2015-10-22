@@ -54,9 +54,6 @@ class feriaController extends AppBaseController
 	{
 		$input = $request->all();
 
-		echo "<pre>";
-		print_r($input);
-		echo "</pre>";
 
 		$dst_plano = "feria/".trim($input['nombre'])."/plano/";
 		$dst_archivos = "feria/".trim($input['nombre'])."/archivos/";

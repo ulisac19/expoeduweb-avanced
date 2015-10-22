@@ -314,3 +314,11 @@ Route::get('posicionAvatars/{id}/delete', [
     'as' => 'posicionAvatars.delete',
     'uses' => 'posicion_avatarController@destroy',
 ]);
+
+
+Route::resource('publicidads', 'publicidadController');
+
+Route::get('publicidads/{id}/delete', [
+    'as' => 'publicidads.delete',
+    'uses' => 'publicidadController@destroy',
+]);
