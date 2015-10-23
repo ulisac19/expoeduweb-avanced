@@ -1,9 +1,6 @@
 <table class="table">
     <thead>
     <th>Nombre</th>
-			<th>Oclusion</th>
-			<th>Malla</th>
-			<th>Imagen Base</th>
     <th width="50px">Action</th>
     </thead>
     <tbody>

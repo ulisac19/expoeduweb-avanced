@@ -31,8 +31,7 @@ class tipo_standController extends AppBaseController
 	{
 		$tipoStands = $this->tipoStandRepository->paginate(10);
 
-		return view('tipoStands.index')
-			->with('tipoStands', $tipoStands);
+		return view('tipoStands.index')->with('tipoStands', $tipoStands);
 	}
 
 	/**

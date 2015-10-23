@@ -109,7 +109,13 @@ class datosController extends AppBaseController
 
 	public function edit3($id)
 	{
-		return view('datos.fields3');
+		return view('datos.fields3')->with('id', $id);
+	}
+	public function edit3post(CreatedatosRequest $request)
+	{
+		echo "<pre>";
+		print_r($request->all());
+		echo "</pre>";
 	}
 
 	public function edit4($id)

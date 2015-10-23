@@ -28,7 +28,7 @@
 </style>
     @include('common.errors')
 
-    {!! Form::open(['route' => 'datos.store']) !!}
+    {!! Form::open(['url' => 'datos/17/edit3', 'method' => 'POST', 'files'=>true]) !!}
 
     <div class="panel panel-default">
     <div class="panel-body">
@@ -101,6 +101,8 @@
       -->
 
     <div id="map"></div>
+    <div id="puntos"></div>
+    
 </div>
 <div class="form-group col-sm-6 col-lg-12">
       <button type="button" class="btn btn-danger" onclick="deleteMarkers();" value=""><i class='glyphicon glyphicon-trash'></i> Quizar todos</button>
@@ -222,8 +224,7 @@ function initMap() {
 
   // This event listener will call addMarker() when the map is clicked.
   map.addListener('click', function(event) {
-    addMarker(event.latLng);
-  });
+    addMarker(event.latLng);  });
 
   // Adds a marker at the center of the map.
   addMarker(haightAshbury);
@@ -235,6 +236,8 @@ function addMarker(location) {
     position: location,
     map: map
   });
+
+  $('#puntos').append('<input type="hidden" name="puntox[]" id="puntox" value="'+marker.position.lat()+'" /><input type="hidden" name="puntoy[]" id="puntoy" value="'+marker.position.lng()+'" />'); 
   markers.push(marker);
 }
 

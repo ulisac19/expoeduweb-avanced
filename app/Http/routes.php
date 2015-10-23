@@ -93,6 +93,7 @@ Route::get('colors/{id}/delete', [
 
 Route::get('datos/{id}/edit2', ['as' => 'datos.edit2', 'uses' => 'datosController@edit2']);
 Route::get('datos/{id}/edit3', ['as' => 'datos.edit3', 'uses' => 'datosController@edit3']);
+Route::post('datos/{id}/edit3', ['as' => 'datos.edit3', 'uses' => 'datosController@edit3post']);
 Route::get('datos/{id}/edit4', ['as' => 'datos.edit4', 'uses' => 'datosController@edit4']);
 Route::get('datos/{id}/edit5', ['as' => 'datos.edit5', 'uses' => 'datosController@edit5']);
 Route::get('datos/{id}/edit6', ['as' => 'datos.edit6', 'uses' => 'datosController@edit6']);
@@ -201,6 +202,7 @@ Route::get('stands/{id}/delete', [
 ]);
 
 
+Route::get('tipoStands/index', ['as' => 'tipoStands.index','uses' => 'tipo_standController@index',]);
 Route::resource('tipoStands', 'tipo_standController');
 Route::get('tipoStands/{id}/delete', ['as' => 'tipoStands.delete','uses' => 'tipo_standController@destroy',]);
 

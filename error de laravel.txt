@@ -1,0 +1,3 @@
+/vendor/laravel/framework/src/Illuminate/Pagination/AbdstractPaginator.php
+linea 130
+     return substr($this->path, 0 , -1).'?'
