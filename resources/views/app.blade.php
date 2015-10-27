@@ -201,6 +201,37 @@ display: none !important;
     {!! Html::script('js/bootstrap.min.js') !!}
     {!! Html::script('js/fileinput.min.js') !!}
     {!! Html::script('js/bootstrap-datepicker.js') !!}
+    {!! Html::script('js/region.js') !!}
+    <script type="text/javascript">
+  // Base para la librería.
+  //Region.pointColor = "green";
+  //Region.boxColor = "lightgreen";
+  var x, y, largo, ancho;
+  Region.container = document.getElementById("mycontainer");
+  //Region.container = $("#mycontainer");
+  Region.callback = function () {
+    // Esta función se llama cada vez que se modifica la selección (solo a mano,
+    // con Region.setRect() no se llama callback).
+    console.log(Region.rect);
+    x = Region.rect.x;
+    y = Region.rect.y;
+    ancho = Region.rect.width;
+    largo = Region.rect.height;
+    
+  }
+  Region.init();
+
+ $(document).on('click', '.ext', function(e){
+ 
+ });
+ $(document).on('click', '.sel', function(){
+
+ 	console.log($('#x-'+this.id).val(x));
+ 	console.log($('#y-'+this.id).val(y));
+ 	console.log($('#largo-'+this.id).val(largo));
+ 	console.log($('#ancho-'+this.id).val(ancho));
+ });
+</script>
     <script type="text/javascript">
     var cont = 0;
     var band = true;
@@ -360,8 +391,10 @@ var cad, id2;
 		});	 
   		
 	});
+	var cont = 2;
 	$(document).on('click', '#otraparte', function (e){
-		$('#tbodyparte').append('<tr> <td><input class="form-control" contenteditable="true" name="tipo[]" id="tipo"></input></td><td><select name="imagen[]" id="imagen" class="form-control"><option value="1">Imagen</option><option value="2">Color</option></select></td><td><select name="click[]" id="click" class="form-control"><option value="1">Si</option><option value="2">No</option></select></td><td><input class="form-control" contenteditable="true" name="x[]" id="x"></input></td><td><input class="form-control" contenteditable="true" name="y[]" id="y"></input></td><td><input class="form-control" contenteditable="true" name="ancho[]" id="ancho"></input></td><td><input class="form-control" contenteditable="true" name="largo[]" id="largo"></input></td><td><button type="button" class="btn btn-danger" onClick="this.parentNode.parentNode.remove();" ><i class="glyphicon glyphicon-trash"></i></button></td></tr>');
+		$('#tbodyparte').append('<tr> <td><input class="form-control" contenteditable="true" name="tipo[]" id="tipo"></input></td><td><select name="imagen[]" id="imagen" class="form-control"><option value="1">Imagen</option><option value="2">Color</option></select></td><td><select name="click[]" id="click" class="form-control"><option value="1">Si</option><option value="2">No</option></select></td><td><input class="form-control" contenteditable="true" name="x[]" id="x-'+cont+'"></input></td><td><input class="form-control" contenteditable="true" name="y[]" id="y-'+cont+'""></input></td><td><input class="form-control" contenteditable="true" name="ancho[]" id="ancho-'+cont+'""></input></td><td><input class="form-control" contenteditable="true" name="largo[]" id="largo-'+cont+'""></input></td><td><button type="button" class="btn btn-danger" onClick="this.parentNode.parentNode.remove();" ><i class="glyphicon glyphicon-trash"></i></button>  <button type="button" id="'+cont+'" class="btn btn-info sel"><i class="glyphicon glyphicon-upload"></i></button></td></tr>');
+	cont++;
 	});
 
 	$('#pais_id').change( function (e){
@@ -405,7 +438,7 @@ function myTimer()
 			type: 'GET',
 			data: {x: 1, y: 1, z: 1, rot: 1, action: 1, user_id:1 },
 			success : function(result){
-				console.log(result);
+			//	console.log(result);
 			}
 	});
 }

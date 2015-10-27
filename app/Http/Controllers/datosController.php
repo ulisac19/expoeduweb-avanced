@@ -7,6 +7,7 @@ use App\Libraries\Repositories\datosRepository;
 use Flash;
 use Mitul\Controller\AppBaseController as AppBaseController;
 use Response;
+use Auth;
 
 class datosController extends AppBaseController
 {
@@ -111,11 +112,38 @@ class datosController extends AppBaseController
 	{
 		return view('datos.fields3')->with('id', $id);
 	}
+
 	public function edit3post(CreatedatosRequest $request)
 	{
-		echo "<pre>";
-		print_r($request->all());
-		echo "</pre>";
+		$input = $request->all();
+		
+		$institucion = new \App\Models\institucion;
+		$institucion->nombre = $input['nombre'];
+		$institucion->telefono = $input['telefono'];
+		$institucion->email = $input['email'];
+		$institucion->descripcion = $input['descripcion'];
+		$institucion->logo = $input['logo'];
+		$institucion->razon_social  = $input['razon_social'];
+		$institucion->RIF = $input['RIF'];
+		$institucion->website = $input['website'];
+		$institucion->facebook = $input['facebook'];
+		$institucion->twitter = $input['twitter'];
+		$institucion->instagram = $input['instagram'];
+		if($institucion->save())
+		{
+			$id = $institucion->id;
+			for ($i=0; $i < count( $input['puntox'] ) ; $i++) 
+			{ 
+	 
+				$sucursal = new \App\Models\sucursal;
+				$sucursal->lat = $input['puntox'][$i];	
+				$sucursal->lng = $input['puntoy'][$i];
+				$sucursal->institucion_id = $id;
+				$sucursal->save();
+			}
+		}
+	$usuario = \App\Models\datos::where('users_id', '=', Auth::user()->id)->first();
+		return redirect()->route('datos.edit4', [$usuario->id]);
 	}
 
 	public function edit4($id)

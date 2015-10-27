@@ -1,5 +1,12 @@
 
-
+  <style type="text/css">
+  #mycontainer {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    /*overflow: hidden;*/
+  }
+  </style>
 <div class="form-group col-sm-12 col-lg-12">
 
 	    	<br>
@@ -55,7 +62,7 @@
 
 		<div class="form-group col-sm-6 col-lg-8">
 			<div class="panel panel-default">
-		    	<div class="panel-body">
+		    	<div class="panel-body" id="mycontainer">
 		    	</div>
 		    </div>
 		</div>
@@ -86,11 +93,14 @@
 	             <td><input class="form-control" contenteditable="true" name="tipo[]" id="tipo"></input></td>
 	             <td><select name="imagen[]" id="imagen" class="form-control"><option value="1">Imagen</option><option value="2">Color</option></select></td>
 	             <td><select name="click[]" id="click" class="form-control"><option value="1">Si</option><option value="2">No</option></select></td>
-	             <td><input class="form-control" contenteditable="true" name="x[]" id="x"></input></td>
-	             <td><input class="form-control" contenteditable="true" name="y[]" id="y"></input></td>
-	             <td><input class="form-control" contenteditable="true" name="ancho[]" id="ancho"></input></td>
-	             <td><input class="form-control" contenteditable="true" name="largo[]" id="largo"></input></td>
-	             <td><button type="button"  class="btn btn-danger" onClick="this.parentNode.parentNode.remove();" ><i class="glyphicon glyphicon-trash"></i></button></td>
+	             <td><input class="form-control" contenteditable="true" name="x[]" id="x-1"></input></td>
+	             <td><input class="form-control" contenteditable="true" name="y[]" id="y-1"></input></td>
+	             <td><input class="form-control" contenteditable="true" name="ancho[]" id="ancho-1"></input></td>
+	             <td><input class="form-control" contenteditable="true" name="largo[]" id="largo-1"></input></td>
+	             <td>
+	             	<button type="button" class="btn btn-danger" onClick="this.parentNode.parentNode.remove();" ><i class="glyphicon glyphicon-trash"></i></button>
+	             	<button type="button" id="1" class="btn btn-info sel"><i class="glyphicon glyphicon-upload"></i></button>
+	             </td>
 	            </tr>                
               </tbody>
             </table>

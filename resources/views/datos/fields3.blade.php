@@ -39,7 +39,7 @@
 
          <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('razon', 'Razon Social') !!}
-            {!! Form::text('razon', '', ['class' => 'form-control']) !!}
+            {!! Form::text('razon_social', '', ['class' => 'form-control']) !!}
         </div>
 
          <div class="form-group col-sm-6 col-lg-4">
@@ -52,7 +52,7 @@
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('rif', 'RIF') !!}
-            {!! Form::text('rif', '', ['class' => 'form-control']) !!}
+            {!! Form::text('RIF', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('website', 'Website') !!}
@@ -61,10 +61,6 @@
         <div class="form-group col-sm-6 col-lg-4">
             {!! Form::label('celular', 'Celular') !!}
             {!! Form::text('celular', '', ['class' => 'form-control']) !!}
-        </div>
-        <div class="form-group col-sm-6 col-lg-4">
-            {!! Form::label('email', 'Email') !!}
-            {!! Form::text('email', '', ['class' => 'form-control']) !!}
         </div>
         <!-- pais Id Field -->
     <div class="form-group col-sm-6 col-lg-4">
@@ -91,6 +87,10 @@
         <div class="form-group col-sm-6 col-lg-12">
             {!! Form::label('direccion', 'Direccion') !!}
             {!! Form::text('direccion', '', ['class' => 'form-control']) !!}
+        </div>    
+        <div class="form-group col-sm-6 col-lg-12">
+            {!! Form::label('descripcion', 'Descripcion') !!}
+            {!! Form::text('descripcion', '', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group col-sm-6 col-lg-12">
 

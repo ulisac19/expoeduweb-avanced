@@ -324,3 +324,27 @@ Route::get('publicidads/{id}/delete', [
     'as' => 'publicidads.delete',
     'uses' => 'publicidadController@destroy',
 ]);
+
+
+Route::resource('sucursals', 'sucursalController');
+
+Route::get('sucursals/{id}/delete', [
+    'as' => 'sucursals.delete',
+    'uses' => 'sucursalController@destroy',
+]);
+
+
+Route::resource('sucursals', 'sucursalController');
+
+Route::get('sucursals/{id}/delete', [
+    'as' => 'sucursals.delete',
+    'uses' => 'sucursalController@destroy',
+]);
+
+
+Route::resource('sucursals', 'sucursalController');
+
+Route::get('sucursals/{id}/delete', [
+    'as' => 'sucursals.delete',
+    'uses' => 'sucursalController@destroy',
+]);
