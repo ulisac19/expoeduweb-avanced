@@ -222,14 +222,20 @@ display: none !important;
   Region.init();
 
  $(document).on('click', '.ext', function(e){
- 
+ 	x = $('#x-'+this.id).val();
+ 	y = $('#y-'+this.id).val();
+ 	largo = $('#largo-'+this.id).val();
+ 	ancho = $('#ancho-'+this.id).val();
+
+ 	Region.setRect(x,y,ancho,largo);
  });
+
  $(document).on('click', '.sel', function(){
 
- 	console.log($('#x-'+this.id).val(x));
- 	console.log($('#y-'+this.id).val(y));
- 	console.log($('#largo-'+this.id).val(largo));
- 	console.log($('#ancho-'+this.id).val(ancho));
+ 	$('#x-'+this.id).val(x);
+ 	$('#y-'+this.id).val(y);
+ 	$('#largo-'+this.id).val(largo);
+ 	$('#ancho-'+this.id).val(ancho);
  });
 </script>
     <script type="text/javascript">
@@ -393,7 +399,7 @@ var cad, id2;
 	});
 	var cont = 2;
 	$(document).on('click', '#otraparte', function (e){
-		$('#tbodyparte').append('<tr> <td><input class="form-control" contenteditable="true" name="tipo[]" id="tipo"></input></td><td><select name="imagen[]" id="imagen" class="form-control"><option value="1">Imagen</option><option value="2">Color</option></select></td><td><select name="click[]" id="click" class="form-control"><option value="1">Si</option><option value="2">No</option></select></td><td><input class="form-control" contenteditable="true" name="x[]" id="x-'+cont+'"></input></td><td><input class="form-control" contenteditable="true" name="y[]" id="y-'+cont+'""></input></td><td><input class="form-control" contenteditable="true" name="ancho[]" id="ancho-'+cont+'""></input></td><td><input class="form-control" contenteditable="true" name="largo[]" id="largo-'+cont+'""></input></td><td><button type="button" class="btn btn-danger" onClick="this.parentNode.parentNode.remove();" ><i class="glyphicon glyphicon-trash"></i></button>  <button type="button" id="'+cont+'" class="btn btn-info sel"><i class="glyphicon glyphicon-upload"></i></button></td></tr>');
+		$('#tbodyparte').append('<tr> <td><input class="form-control" contenteditable="true" name="tipo[]" id="tipo"></input></td><td><select name="imagen[]" id="imagen" class="form-control"><option value="1">Imagen</option><option value="2">Color</option></select></td><td><select name="click[]" id="click" class="form-control"><option value="1">Si</option><option value="2">No</option></select></td><td><input class="form-control" contenteditable="true" name="x[]" id="x-'+cont+'"></input></td><td><input class="form-control" contenteditable="true" name="y[]" id="y-'+cont+'""></input></td><td><input class="form-control" contenteditable="true" name="ancho[]" id="ancho-'+cont+'""></input></td><td><input class="form-control" contenteditable="true" name="largo[]" id="largo-'+cont+'""></input></td><td><button type="button" class="btn btn-danger" onClick="this.parentNode.parentNode.remove();" ><i class="glyphicon glyphicon-trash"></i></button>  <button type="button" id="'+cont+'" class="btn btn-info sel"><i class="glyphicon glyphicon-upload"></i></button> <button type="button" id="'+cont+'" class="btn btn-primary ext"><i class="glyphicon glyphicon-download"></i></button></td></tr>');
 	cont++;
 	});
 

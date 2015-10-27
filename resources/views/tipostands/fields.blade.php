@@ -100,6 +100,7 @@
 	             <td>
 	             	<button type="button" class="btn btn-danger" onClick="this.parentNode.parentNode.remove();" ><i class="glyphicon glyphicon-trash"></i></button>
 	             	<button type="button" id="1" class="btn btn-info sel"><i class="glyphicon glyphicon-upload"></i></button>
+	             	<button type="button" id="1" class="btn btn-primary ext"><i class="glyphicon glyphicon-download"></i></button>
 	             </td>
 	            </tr>                
               </tbody>
