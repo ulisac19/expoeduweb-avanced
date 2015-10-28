@@ -32,7 +32,7 @@
 				<!-- Imagen Base Field -->
 				<div class="form-group col-sm-12 col-lg-12">
 				    {!! Form::label('imagen_base', 'Imagen Base:') !!}
-					{!! Form::file('imagen_base', ['class' => 'file', 'data-show-upload'=>'false', 'data-show-caption'=>'true']) !!}
+					{!! Form::file('imagen_base', ['class' => 'file', 'data-show-upload'=>'false', 'data-show-caption'=>'true', 'onchange'=>"showMyImage(this)"]) !!}
 				</div>
 
 				<!-- Imagen Base Field -->
@@ -63,6 +63,7 @@
 		<div class="form-group col-sm-6 col-lg-8">
 			<div class="panel panel-default">
 		    	<div class="panel-body" id="mycontainer">
+		    			<img id="thumbnil" />
 		    	</div>
 		    </div>
 		</div>

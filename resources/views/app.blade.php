@@ -202,6 +202,8 @@ display: none !important;
     {!! Html::script('js/fileinput.min.js') !!}
     {!! Html::script('js/bootstrap-datepicker.js') !!}
     {!! Html::script('js/region.js') !!}
+
+
     <script type="text/javascript">
   // Base para la librería.
   //Region.pointColor = "green";
@@ -212,7 +214,7 @@ display: none !important;
   Region.callback = function () {
     // Esta función se llama cada vez que se modifica la selección (solo a mano,
     // con Region.setRect() no se llama callback).
-    console.log(Region.rect);
+    //	console.log(Region.rect);
     x = Region.rect.x;
     y = Region.rect.y;
     ancho = Region.rect.width;
@@ -221,13 +223,14 @@ display: none !important;
   }
   Region.init();
 
+ 
  $(document).on('click', '.ext', function(e){
  	x = $('#x-'+this.id).val();
  	y = $('#y-'+this.id).val();
  	largo = $('#largo-'+this.id).val();
  	ancho = $('#ancho-'+this.id).val();
 
- 	Region.setRect(x,y,ancho,largo);
+ 	Region.setRect(parseFloat(x),parseFloat(y),parseFloat(ancho),parseFloat(largo));
  });
 
  $(document).on('click', '.sel', function(){
@@ -447,11 +450,32 @@ function myTimer()
 			//	console.log(result);
 			}
 	});
+	
 }
 	$('.fecha').datepicker({
 		 todayBtn: true,
 		
 	});
+
+	 function showMyImage(fileInput) {
+        var files = fileInput.files;
+        for (var i = 0; i < files.length; i++) {           
+            var file = files[i];
+            var imageType = /image.*/;     
+            if (!file.type.match(imageType)) {
+                continue;
+            }           
+            var img=document.getElementById("thumbnil");            
+            img.file = file;    
+            var reader = new FileReader();
+            reader.onload = (function(aImg) { 
+                return function(e) { 
+                    aImg.src = e.target.result; 
+                }; 
+            })(img);
+            reader.readAsDataURL(file);
+        }    
+    }
 </script>
 
 </body>
