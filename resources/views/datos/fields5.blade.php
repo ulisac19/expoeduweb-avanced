@@ -1,18 +1,51 @@
 @extends('app')
 
 @section('content')
+
 <div class="container">
 
     @include('common.errors')
 
     {!! Form::open(['route' => 'datos.store']) !!}
+        <h1>Stand Editor</h1>
 
-    <div class="panel panel-default">
+<div class="panel panel-default">
     <div class="panel-body">
+      <div class="form-group col-sm-6 col-lg-6">
+          <div id="renderDiv"></div>
+          <div id="image-div">
+            <div id="image-main">
+            <!--  <img src="../../../public/img/stand/diff_bro_1.jpg">-->
+              <div id="image-cursor"></div>
+            </div> 
+          </div>
+      </div>
 
+        <div id="formstand"></div>
+      <div class="form-group col-sm-6 col-lg-6">
+        <div class="form-group col-sm-6 col-lg-12">
+            {!! Form::label('nombre', 'Nombre de la seccion') !!}
+            {!! Form::text('nombre','', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+            {!! Form::label('contenido', 'Contenido') !!}
+            {!! Form::text('contenido','', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+            {!! Form::label('parte', 'Parte seleccionada') !!}
+            {!! Form::text('parte','', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+            {!! Form::label('contenido', 'Contenido enlazado') !!}
+            {!! Form::text('contenido','', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-6 col-lg-12">
+            {!! Form::label('color', 'Color') !!}
+            {!! Form::select('color', ['1'=>'Azul', '2'=>'Rojo','3'=>'Amarillo'], '', ['class' => 'form-control']) !!}
+        </div>
+      </div>
     </div>
 </div>
-
 <div class="panel panel-default">
     <div class="panel-body">
             <div class="row bs-wizard" style="border-bottom:0;">
@@ -81,6 +114,4 @@
 
     {!! Form::close() !!}
 </div>
-<script type="text/javascript">
-</script>
 @endsection

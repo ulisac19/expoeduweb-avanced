@@ -19,6 +19,7 @@ display: none !important;
     {!! Html::style('css/wizard.css') !!}
     {!! Html::style('css/fileinput.min.css') !!}
     {!! Html::style('css/bootstrap-datepicker.css') !!}
+    {!! Html::style('css/colorpicker.css') !!}
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,7 +30,7 @@ display: none !important;
     <![endif]-->
 </head>
 <body>
-	<div id="a"></div>
+
 <div class="navbar-wrapper">
       <div class="container">
     <nav class="navbar navbar-inverse navbar-static-to">
@@ -46,6 +47,13 @@ display: none !important;
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		        <ul class="nav navbar-nav">
 		        	@if (!Auth::guest())
+
+		        	<?php $stand = \App\Models\stand::where('user_id', '=', Auth::user()->id)->get(); ?>
+					<?php $tipo_stand = \App\Models\tipo_stand::where('id', '=', $stand[0]->tipo_stand_id)->get(); ?>
+					<?php $cadena =  '../../../storage/app/'."tipo/".$tipo_stand[0]->nombre."/imagen_base/".$tipo_stand[0]->imagen_base ?>
+					<?php $cadenaobj =  '../../../storage/app/'."tipo/".$tipo_stand[0]->nombre."/obj/".$tipo_stand[0]->obj ?>
+			
+
 				    	<li>{!! link_to('/expo', 'Expoedu', []) !!}</li>
 				    	<li class="dropdown">
 		                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Avatar <span class="caret"></span></a>
@@ -140,7 +148,6 @@ display: none !important;
 @if (!Auth::guest())
 
 <input id="id_cliente" value="2" type="hidden" />
-
 <div class="container" id="cont">
                     <input id="id1" type="hidden" value="<?= Auth::user()->id ?>" />
                     <input id="id2" type="hidden" value="" />
@@ -201,9 +208,21 @@ display: none !important;
     {!! Html::script('js/bootstrap.min.js') !!}
     {!! Html::script('js/fileinput.min.js') !!}
     {!! Html::script('js/bootstrap-datepicker.js') !!}
-    {!! Html::script('js/region.js') !!}
+    {!! Html::script('js/colorpicker.js') !!}
 
-
+	{!! Html::script('js/stand/three.js') !!}
+	{!! Html::script('js/stand/engine.js') !!}
+    {!! Html::script('js/stand/hammer.js') !!}
+	{!! Html::script('js/stand/input_manager.js') !!}
+	{!! Html::script('js/stand/character_controller.js') !!}
+	{!! Html::script('js/stand/stand_editor.js') !!}
+	{!! Html::script('js/region.js') !!}
+<?php
+$tipo = \App\Models\parte_tipo::where(['tipo_stand_id'=>$stand[0]->tipo_stand_id])->get()->toJson();
+echo "<pre>";
+print_r($tipo);
+echo "</pre>";
+?>
     <script type="text/javascript">
   // Base para la librería.
   //Region.pointColor = "green";
@@ -440,16 +459,16 @@ function myTimer()
 			success : function(result){
 				
 			}
-	});	
+	});	/*
 
 	$.ajax({
 			url: "{{ route('posicionAvatars.updateposicion') }}",
 			type: 'GET',
 			data: {x: 1, y: 1, z: 1, rot: 1, action: 1, user_id:1 },
 			success : function(result){
-			//	console.log(result);
+				console.log(result);
 			}
-	});
+	});*/
 	
 }
 	$('.fecha').datepicker({
@@ -457,25 +476,47 @@ function myTimer()
 		
 	});
 
-	 function showMyImage(fileInput) {
-        var files = fileInput.files;
-        for (var i = 0; i < files.length; i++) {           
-            var file = files[i];
-            var imageType = /image.*/;     
-            if (!file.type.match(imageType)) {
-                continue;
-            }           
-            var img=document.getElementById("thumbnil");            
-            img.file = file;    
-            var reader = new FileReader();
-            reader.onload = (function(aImg) { 
-                return function(e) { 
-                    aImg.src = e.target.result; 
-                }; 
-            })(img);
-            reader.readAsDataURL(file);
-        }    
-    }
+
+  // El editor debe ir dentro de este div, puede ser dom o jquery
+  Editor.container = document.getElementById("renderDiv");
+
+  // Esta función se llama cada vez que se hace click en el stand, sin importar
+  // si se seleccionó algo o no
+  Editor.onClick( function (x,y) {
+    var cursor = document.getElementById("image-cursor");
+    cursor.style.left = (x*100) + "%";
+    cursor.style.top = (y*100) + "%";
+  });
+
+  // Estos son datos aleatorios de las partes del stand
+  var data = [
+    {x:0.0, y:0.0, ancho:0.32, alto:0.73, nombre: "pendon1"},
+    {x:0.335, y:0, ancho:0.32, alto:0.73, nombre: "pendon2"},
+    {x:0.0, y:0.7, ancho:0.55, alto:0.3, nombre: "mesa"},
+    {x:0.56, y:0.71, ancho:0.08, alto:0.2, nombre: "redes"},
+  ];
+
+  // Esto es un helper para meter los datos al Editor, el primero es un array
+  // de objetos, el segundo, tercero,cuarto y quinto son los nombres de
+  // x,y,width y height, respectivamente
+  Editor.cargarRegiones(data, "x","y","ancho","alto");
+
+  // Esta se llama cada vez que se selecciona una parte
+  Editor.onSelect(function (obj) {
+    var parte = obj.base;
+    console.log(parte); 
+    $('#parte').val(parte.nombre);
+  })
+
+  // Estas son para cargar el obj y la textura, se pasan los url
+  //Editor.loadJson("../../../public/img/stand/std_bro_1.json");
+  Editor.loadJson('<?= $cadenaobj ?>');
+  Editor.loadTexture('<?= $cadena ?>');
+  // Editor.loadOcclusion("occ_bro_1.jpg"); // Oclusion tiene bug
+
+  // Armar todo
+  Editor.init();
+
 </script>
 
 </body>
